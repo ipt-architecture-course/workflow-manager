@@ -1,0 +1,4 @@
+{
+  "thumbnail": "app.adapters.thumbnail_adapter.ThumbnailAdapter",
+  "keywords": "app.adapters.keywords_adapter.KeywordsAdapter"
+}
