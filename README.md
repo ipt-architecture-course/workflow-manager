@@ -1,6 +1,7 @@
 # Workflow Manager
 
-The **Workflow Manager** is a service designed to orchestrate content workflows by interacting with various external services like **Profile Manager**, **Thumbnail Generator**, **Keywords Generator**, **ChatGPT**, and others. It uses the **Hexagonal Architecture (Ports & Adapters)** pattern to ensure scalability, extensibility, and maintainability.
+The **Workflow Manager** is a service designed to orchestrate content workflows by interacting with various external services like **Profile Manager**, **Thumbnail Generator**, **Keywords Generator**, **ChatGPT**, and others. 
+It uses the **Hexagonal Architecture (Ports & Adapters)** pattern to ensure scalability, extensibility, and maintainability.
 
 ---
 
@@ -45,34 +46,34 @@ External services process specific tasks:
 Thumbnail Generator: Creates thumbnails for uploaded content.
 Keywords Generator: Extracts keywords from text-based content.
 ChatGPT Integration: Summarizes or transforms text dynamically.
+
 ## 🔄 Communication Flow
 1. Starting a Workflow
 Input: The Workflow Manager receives a request:
-json
-Copiar código
+
 {
   "id_profile": "123",
-  "id_conteudo": "456"
+  "id_content": "456"
 }
+
 Profile Manager Communication: The Workflow Manager queries the Profile Manager to identify the process_type:
-json
-Copiar código
+
 {
   "id_profile": "123",
   "process_type": "thumbnail"
 }
+
 Processing Request: Based on the process_type, the Workflow Manager publishes a message to RabbitMQ:
-json
-Copiar código
+
 {
   "workflow_id": "abc-123",
   "id_conteudo": "456"
 }
+
 2. Processing and Results
 Request: The Workflow Manager publishes processing requests to RabbitMQ on topics like generator.thumbnail.process.
 Response: External services publish results back to a common topic workflow.results:
-json
-Copiar código
+
 {
   "workflow_id": "abc-123",
   "status": "completed",
@@ -80,7 +81,8 @@ Copiar código
     "url": "https://example.com/thumbnail.jpg"
   }
 }
-🚀 Getting Started
+
+## 🚀 Getting Started
 Prerequisites
 Python 3.9+
 RabbitMQ instance (local or cloud)
