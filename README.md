@@ -55,14 +55,14 @@ Input: The Workflow Manager receives a request:
 {
   "id_profile": "123",
   "id_content": "456"
-}
+}```
 
 Profile Manager Communication: The Workflow Manager queries the Profile Manager to identify the process_type:
 ```json
 {
   "id_profile": "123",
   "process_type": "thumbnail"
-}
+}```
 
 Processing Request: Based on the process_type, the Workflow Manager publishes a message to RabbitMQ:
 
@@ -70,7 +70,7 @@ Processing Request: Based on the process_type, the Workflow Manager publishes a 
 {
   "workflow_id": "abc-123",
   "id_conteudo": "456"
-}
+}```
 
 2. Processing and Results
 Request: The Workflow Manager publishes processing requests to RabbitMQ on topics like generator.thumbnail.process.
@@ -82,7 +82,7 @@ Response: External services publish results back to a common topic workflow.resu
   "output": {
     "url": "https://example.com/thumbnail.jpg"
   }
-}
+}```
 
 ## 🚀 Getting Started
 Prerequisites
@@ -123,7 +123,7 @@ json
 ```json
 {
     "new_process_type": "app.adapters.new_adapter.NewAdapter"
-}
+}```
 
 ## 🌐 API Endpoints
 1. Start a Workflow
@@ -133,14 +133,14 @@ Request Payload:
 {
   "id_profile": "123",
   "id_conteudo": "456"
-}
+}```
 Response:
 
 ```json
 {
   "workflow_id": "abc-123",
   "status": "processing_started"
-}
+}```
 
 2. Check Workflow Status
 Endpoint: GET /workflows/status/{workflow_id}
@@ -152,7 +152,7 @@ Response:
   "results": {
     "thumbnail": "https://example.com/thumbnail.jpg"
   }
-}
+}```
 
 ## 🧪 Testing
 Run Unit Tests
