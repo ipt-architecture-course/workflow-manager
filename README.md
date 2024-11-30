@@ -91,30 +91,25 @@ Installation
 Clone the Repository:
 
 bash
-Copiar código
 git clone https://github.com/ipt-architecture-course/workflow-manager.git
 cd workflow-manager
 Set Up a Virtual Environment:
 
 bash
-Copiar código
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 Install Dependencies:
 
 bash
-Copiar código
 pip install -r requirements.txt
 Run the Application:
 
 bash
-Copiar código
 uvicorn app.main:app --reload
 🔧 Adding New Adapters
 Implement the BaseAdapter Interface:
 
 python
-Copiar código
 from app.ports.base_adapter import BaseAdapter
 
 class NewAdapter(BaseAdapter):
@@ -123,35 +118,32 @@ class NewAdapter(BaseAdapter):
 Register the Adapter in adapters_config.json:
 
 json
-Copiar código
+
 {
     "new_process_type": "app.adapters.new_adapter.NewAdapter"
 }
+
 ## 🌐 API Endpoints
 1. Start a Workflow
 Endpoint: POST /workflows/start
 Request Payload:
 
-json
-Copiar código
 {
   "id_profile": "123",
   "id_conteudo": "456"
 }
 Response:
 
-json
-Copiar código
+
 {
   "workflow_id": "abc-123",
   "status": "processing_started"
 }
+
 2. Check Workflow Status
 Endpoint: GET /workflows/status/{workflow_id}
 Response:
 
-json
-Copiar código
 {
   "workflow_id": "abc-123",
   "status": "completed",
@@ -159,12 +151,12 @@ Copiar código
     "thumbnail": "https://example.com/thumbnail.jpg"
   }
 }
+
 ## 🧪 Testing
 Run Unit Tests
 To execute all tests:
 
 bash
-Copiar código
 pytest
 
 ## 🗂️ Project Structure
