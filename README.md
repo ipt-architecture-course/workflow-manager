@@ -51,13 +51,14 @@ ChatGPT Integration: Summarizes or transforms text dynamically.
 1. Starting a Workflow
 Input: The Workflow Manager receives a request:
 
+```json
 {
   "id_profile": "123",
   "id_content": "456"
 }
 
 Profile Manager Communication: The Workflow Manager queries the Profile Manager to identify the process_type:
-
+```json
 {
   "id_profile": "123",
   "process_type": "thumbnail"
@@ -65,6 +66,7 @@ Profile Manager Communication: The Workflow Manager queries the Profile Manager 
 
 Processing Request: Based on the process_type, the Workflow Manager publishes a message to RabbitMQ:
 
+```json
 {
   "workflow_id": "abc-123",
   "id_conteudo": "456"
@@ -73,7 +75,7 @@ Processing Request: Based on the process_type, the Workflow Manager publishes a 
 2. Processing and Results
 Request: The Workflow Manager publishes processing requests to RabbitMQ on topics like generator.thumbnail.process.
 Response: External services publish results back to a common topic workflow.results:
-
+```json
 {
   "workflow_id": "abc-123",
   "status": "completed",
@@ -118,7 +120,7 @@ class NewAdapter(BaseAdapter):
 Register the Adapter in adapters_config.json:
 
 json
-
+```json
 {
     "new_process_type": "app.adapters.new_adapter.NewAdapter"
 }
@@ -127,14 +129,14 @@ json
 1. Start a Workflow
 Endpoint: POST /workflows/start
 Request Payload:
-
+```json
 {
   "id_profile": "123",
   "id_conteudo": "456"
 }
 Response:
 
-
+```json
 {
   "workflow_id": "abc-123",
   "status": "processing_started"
@@ -143,7 +145,7 @@ Response:
 2. Check Workflow Status
 Endpoint: GET /workflows/status/{workflow_id}
 Response:
-
+```json
 {
   "workflow_id": "abc-123",
   "status": "completed",
