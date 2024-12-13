@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from app.controllers.workflow_controller import router as workflow_router
-from app.core.processor_factory import ProcessorFactory
-from app.utils.config_loader import load_adapters_from_config
+from app.controllers.workflow_controller import workflow_router
 
-app = FastAPI()
 
-processor_factory = ProcessorFactory()
-load_adapters_from_config("adapters_config.json", processor_factory)
+app = FastAPI(title="Workflow Manager")
 
+# Inclui os endpoints do Workflow Manager
 app.include_router(workflow_router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Workflow Manager"}

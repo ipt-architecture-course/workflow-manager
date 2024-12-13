@@ -1,25 +1,29 @@
 import uuid
-from app.core.processor_factory import processor_factory
-from app.adapters.profile_adapter import ProfileAdapter
+from app.ports.base_adapter import BaseAdapter
+from app.utils.config_loader import load_config
+from app.adapters.rabbitmq_adapter import RabbitMQAdapter
 
 class WorkflowService:
     def __init__(self):
-        self.profile_adapter = ProfileAdapter()
+        self.config = load_config()
+        self.rabbitmq = RabbitMQAdapter()
 
-    def start_workflow(self, id_profile, id_conteudo):
-        if not id_profile or not id_conteudo:
-            raise ValueError("id_profile and id_conteudo are required.")
-
-        profile_data = self.profile_adapter.get_profile(id_profile)
-        process_type = profile_data.get("process_type")
-
+    def start_workflow(self, id_profile: str, id_content: str) -> str:
+        process_type = self.get_process_type_from_profile(id_profile)
         if not process_type:
-            raise ValueError(f"No process type defined for profile {id_profile}.")
+            raise ValueError("Invalid process type")
+
+        adapter_class = self.config.get(process_type)
+        if not adapter_class:
+            raise ValueError("Process type not supported")
 
         workflow_id = str(uuid.uuid4())
-        processor = processor_factory.get_processor(process_type)
-        processor.process(workflow_id, id_conteudo)
+        self.rabbitmq.publish(f"generator.{process_type}.process", {
+            "workflow_id": workflow_id,
+            "id_content": id_content
+        })
         return workflow_id
 
-    def get_workflow_status(self, workflow_id):
-        return "in_progress"  # Simulado, pode ser alterado para persist�ncia real
+    def get_process_type_from_profile(self, id_profile: str) -> str:
+        # Simulação: Retorna um tipo de processo baseado no id_profile
+        return "thumbnail" if id_profile == "1" else "keywords"
