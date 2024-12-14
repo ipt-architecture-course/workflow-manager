@@ -1,4 +1,8 @@
 {
   "thumbnail": "app.adapters.thumbnail_adapter.ThumbnailAdapter",
-  "keywords": "app.adapters.keywords_adapter.KeywordsAdapter"
+  "keywords": "app.adapters.keywords_adapter.KeywordsAdapter",
+  "twitter": "app.adapters.twiter_adapter.TwitterAdapter",
+  "chatgpt": "app.adapters.chatgpt_adapter.ChatGPTAdapter",
+  "rabbitmq": "app.adapters.rabbitmq_adapter.RabbitMQAdapter",
+  "content": "app.adapters.content_adapter.ContentUploadAdapter"
 }
