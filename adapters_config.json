@@ -1,8 +1,13 @@
 {
   "thumbnail": "app.adapters.thumbnail_adapter.ThumbnailAdapter",
+<<<<<<< HEAD
   "keywords": "app.adapters.keywords_adapter.KeywordsAdapter",
   "twitter": "app.adapters.twiter_adapter.TwitterAdapter",
   "chatgpt": "app.adapters.chatgpt_adapter.ChatGPTAdapter",
   "rabbitmq": "app.adapters.rabbitmq_adapter.RabbitMQAdapter",
   "content": "app.adapters.content_adapter.ContentUploadAdapter"
 }
+=======
+  "keywords": "app.adapters.keywords_adapter.KeywordsAdapter"
+}
+>>>>>>> 4a1bbd2fa7007d6f5600e8226b0c8c326a83d452
